@@ -9,6 +9,34 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/brands.css">
+    
+    <style>
+      /* 🛠️ 专属修复样式：彻底解决圆角和尺寸太小的问题 */
+      .qr-code-wrapper {
+          text-align: center;
+          margin: 35px auto 20px auto; /* 调整上下间距 */
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .pure-square-qr {
+          width: 240px !important;  /* 显著放大尺寸，确保极速识别 */
+          height: 240px !important; /* 保持等比正方形 */
+          border-radius: 0px !important; /* 🔑 核心：彻底直角化，坚决不要任何圆角，保护二维码完整性 */
+          object-fit: contain !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 淡淡的阴影，让卡片更有质感 */
+          background: #ffffff;
+          padding: 8px; /* 给二维码加一个白边保护框，更专业 */
+      }
+
+      .qr-hint {
+          font-size: 14px;
+          color: #666;
+          margin-top: 12px;
+          font-weight: 500;
+      }
+    </style>
   </head>
 
 <body>
@@ -16,10 +44,13 @@
   <div class="container">
     <div class="column">
 
-        <img class="avatar avatar--rounded" src="images/wecode.png" style="width: 150px; height: 150px;" alt="二维码">
+        <div class="qr-code-wrapper">
+            <img class="pure-square-qr" src="images/wecode.png" alt="微信二维码">
+            <p class="qr-hint">微信内可长按识别，或用相机扫码</p>
+        </div>
         
         <h1><div>欢迎联系我</div></h1>
-        <p>长按上方二维码，或点击下方按钮复制号码直接添加。</p>
+        <p style="margin-bottom: 25px;">或点击下方按钮复制号码手动搜索。</p>
 
         <div class="button-stack" role="navigation">
 
@@ -29,7 +60,7 @@
 
           <button class="button button-default" onclick="copyQqId()" style="background-color: #12B7F5; color: white; border: none; width: 100%; cursor: pointer;">
             <img class="icon" aria-hidden="true" src="images/icons/line.svg" alt="QQ">🐧 点击复制 QQ 号
-          </a>
+          </button>
 
         </div>
 
@@ -41,7 +72,6 @@
   </div>
 
   <script>
-  // 通用复制函数：仅实现复制功能，并给出弹窗提示
   function performCopy(theId, platformName) {
       const transfer = document.createElement('input');
       document.body.appendChild(transfer);
@@ -52,10 +82,9 @@
       try {
           const successful = document.execCommand('copy');
           if (successful) {
-              // 友好的文字提示，告诉用户该干什么，不直接唤起 App
-              alert("已自动复制 " + platformName + " 号【" + theId + "】到您的剪贴板！\n\n您现在可以直接前往微信/QQ的搜索框，长按粘贴，就能快速找到我了。");
+              alert("已自动复制 " + platformName + " 号【" + theId + "】到您的剪贴板！\n\n现在您可以去微信/QQ的搜索框直接长按粘贴了。");
           } else {
-              alert("复制失败，可能是浏览器不支持，请手动输入号码: " + theId);
+              alert("复制失败，请手动输入号码: " + theId);
           }
       } catch (err) {
           alert("复制失败，请手动输入号码: " + theId);
@@ -65,13 +94,13 @@
   }
 
   function copyWechatId() {
-      // ⬇️ A. 【填入你的真实微信号】
-      performCopy("你的微信号", "bigyb888");
+      // ⬇️ 修改为你的真实微信号
+      performCopy("YourWechatId", "bigyb888");
   }
 
   function copyQqId() {
-      // ⬇️ B. 【填入你的真实 QQ 号】
-      performCopy("你的QQ号", "591357736");
+      // ⬇️ 修改为你的真实QQ号
+      performCopy("YourQqId", "591357736");
   }
   </script>
 

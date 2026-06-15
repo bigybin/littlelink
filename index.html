@@ -11,30 +11,43 @@
     <link rel="stylesheet" href="css/brands.css">
     
     <style>
-      /* 🛠️ 专属修复样式：彻底解决圆角和尺寸太小的问题 */
+      /* 🛠️ 专属修复样式：彻底解决顶部边距过大、圆角和尺寸太小的问题 */
+      
+      /* 🔑 核心突破口：强行压低 LittleLink 容器自带的巨额顶部边距 */
+      .container, .column {
+          padding-top: 15px !important; /* 原本这里有极大的高度，我们强行把它压到 15px */
+      }
+
       .qr-code-wrapper {
           text-align: center;
-          margin: 35px auto 20px auto; /* 调整上下间距 */
+          margin: 0px auto 15px auto; /* 🔑 顶部 margin 设为 0，底部留出 15px 间距 */
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 0 !important;
       }
 
       .pure-square-qr {
-          width: 240px !important;  /* 显著放大尺寸，确保极速识别 */
-          height: 240px !important; /* 保持等比正方形 */
-          border-radius: 0px !important; /* 🔑 核心：彻底直角化，坚决不要任何圆角，保护二维码完整性 */
+          width: 240px !important;  /* 尺寸放大 */
+          height: 240px !important; /* 保持正方形 */
+          border-radius: 0px !important; /* 彻底直角，防止无法扫描 */
           object-fit: contain !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 淡淡的阴影，让卡片更有质感 */
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 淡淡的阴影 */
           background: #ffffff;
-          padding: 8px; /* 给二维码加一个白边保护框，更专业 */
+          padding: 8px; /* 二维码白边保护框 */
       }
 
       .qr-hint {
           font-size: 14px;
           color: #666;
-          margin-top: 2px;
+          margin-top: 8px; /* 缩小二维码与下方文字的距离 */
           font-weight: 500;
+      }
+      
+      /* 优化标题紧凑度：两个 h1 挨得太远的话，可以缩短间距 */
+      h1 {
+          margin-bottom: 5px !important;
+          margin-top: 5px !important;
       }
     </style>
   </head>
